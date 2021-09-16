@@ -40,10 +40,24 @@ Airplane.prototype.land = function () {
 */
 
 function Person(name, age) {
-  // this.name = name;
-  // this. = false;
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function(edible) {
+  if(this.stomach.length < 10) {
+    this.stomach.push(edible);
+  }
+}
+
+Person.prototype.poop = function() {
+  this.stomach =[];
+}
+
+Person.prototype.toString = function() {
+  return `${this.name}, ${this.age}`
+}
 
 
 
@@ -92,18 +106,24 @@ Car.prototype.drive = function(distance) {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+}
+
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
 }
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window Binding is when none of the other rules apply, 'this' will return the window or global object in node or undefined in strict mode.
+  2. Implicit Binding is when the function is invoked look to the left of the dot that's what this refers to
+  3. Explicit Binding is when you use .call, .apply, .bind
+  4. New Binding is when a object is created as a constructor this points to the newly create object
 */
 
 
